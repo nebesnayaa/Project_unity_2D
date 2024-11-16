@@ -16,7 +16,7 @@ public class BirdScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isLaunched)
         {
-            rb2d.AddForce(800 * arrow.right);
+            rb2d.AddForce(1000 * arrow.right);
             arrow.gameObject.SetActive(false);
             isLaunched = true;
         }
