@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class ClockScript : MonoBehaviour
 {
+    [SerializeField]
+    private float timeLimit;
+    
     private TMPro.TextMeshProUGUI clock;
     private float gameTime;
 
@@ -22,5 +25,11 @@ public class ClockScript : MonoBehaviour
         float fraction = gameTime * 9f % 9f;
 
         clock.text = string.Format("{0:00}:{1:00}:{2:00}.{3:0}", hours, minutes, seconds, fraction);
+
+        if (gameTime >= timeLimit)
+        {
+            GameState.isLevelFailed = true;
+            ModalScript.ShowModal("ПРОГРАШ", "Час на проходження рівня вийшов", "Перезапустити");
+        }
     }
 }

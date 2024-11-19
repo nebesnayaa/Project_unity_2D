@@ -14,10 +14,12 @@ public class PigScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.name == "Bird")
+        if(collision.gameObject.CompareTag("PigDestroy"))
         {
-            ModalScript.ShowModal("ЗНИЩЕНО", "-1 супротивник");
+            GameObject.Destroy(this.gameObject);
+
+            GameState.needRecalculatePigs = true;
         }
-        Debug.Log(collision.gameObject.name);
+        
     }
 }

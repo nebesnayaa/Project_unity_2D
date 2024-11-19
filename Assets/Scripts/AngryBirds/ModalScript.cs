@@ -1,26 +1,36 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ModalScript : MonoBehaviour
 {
     [SerializeField]
     private GameObject content;
+
     [SerializeField]
     private TMPro.TextMeshProUGUI titleTMP;
     [SerializeField]
     private TMPro.TextMeshProUGUI messageTMP;
+    [SerializeField]
+    private TMPro.TextMeshProUGUI buttonNextTMP;
 
     private static ModalScript instance;
     private string titleDefault;
     private string messageDefault;
+    private string buttonNextDefault;
 
     void Start()
     {
         instance = this;
         titleDefault = titleTMP.text;
         messageDefault = messageTMP.text;
-        if(content.activeInHierarchy)
+        buttonNextDefault = buttonNextTMP.text;
+        if (content.activeInHierarchy)
         {
             Time.timeScale = 0.0f;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
         }
     }
 
@@ -35,8 +45,21 @@ public class ModalScript : MonoBehaviour
 
     public void OnResumeButtonClick()
     {
-        content.SetActive(false);
         Time.timeScale = 1.0f;
+        content.SetActive(false);
+        if (GameState.isLevelFailed)
+        {
+            SceneManager.LoadScene(GameState.levelIndex);
+        }
+        else if (GameState.isLevelCompleted)
+        {
+            GameState.levelIndex += 1; 
+            if(GameState.levelIndex >= SceneManager.sceneCountInBuildSettings)
+            {
+                GameState.levelIndex = 0;
+            }
+            SceneManager.LoadScene(GameState.levelIndex);
+        }
     }
 
     public void OnExitButtonClick()
@@ -47,7 +70,7 @@ public class ModalScript : MonoBehaviour
         Application.Quit();
     }
 
-    public void _Show(string title = null, string message = null)
+    public void _Show(string title = null, string message = null, string buttonNext = null)
     {
         Time.timeScale = 0.0f;       
         content.SetActive(true);
@@ -56,9 +79,12 @@ public class ModalScript : MonoBehaviour
 
         if (message != null) messageTMP.text = message;
         else messageTMP.text = messageDefault;
+
+        if (buttonNext != null) buttonNextTMP.text = buttonNext;
+        else buttonNextTMP.text = buttonNextDefault;
     }
-    public static void ShowModal(string title = null, string message = null)
+    public static void ShowModal(string title = null, string message = null, string buttonNext = null)
     {
-        instance._Show(title, message);
+        instance._Show(title, message, buttonNext);
     }
 }

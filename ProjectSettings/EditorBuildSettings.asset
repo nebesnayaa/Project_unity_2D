@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/AngryBirds.unity
+    path: Assets/Scenes/AngryBirds0.unity
     guid: ec29d428afe71564996583f88ab3ca79
+  - enabled: 1
+    path: Assets/Scenes/AngryBirds1.unity
+    guid: 1d2ef3323657a3746832e0515e6efe0a
+  - enabled: 1
+    path: Assets/Scenes/AngryBirds2.unity
+    guid: a4137fabbef6de44890a051bd4257184
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   m_UseUCBPForAssetBundles: 0
