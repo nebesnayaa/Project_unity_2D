@@ -11,7 +11,9 @@ public class CloudScript : MonoBehaviour
    
     void Update()
     {
-        this.transform.Translate(Vector2.right * 0.0001f);
+        this.transform.Translate(Vector2.right * 
+            //0.0001f
+            Time.deltaTime / 10);
 
         if(this.transform.position.x > 10f)
         {

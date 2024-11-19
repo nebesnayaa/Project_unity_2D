@@ -23,6 +23,8 @@ public class BirdScript : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0.0f)  return; 
+        
         if (Input.GetKeyDown(KeyCode.Space) && !isLaunched)
         {
             if (forceScript != null)
